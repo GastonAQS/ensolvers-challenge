@@ -8,19 +8,20 @@ import todosApi from '../../api/todosApi'
 interface Props {
     shouldUpdate: boolean;
     updateFunc: Function;
+    token: string;
   }
 
-const FolderList = ({shouldUpdate, updateFunc}: Props) => {
+const FolderList = ({shouldUpdate, updateFunc, token}: Props) => {
     const [folders, setFolders] = useState<Array<FolderTypeOverview>>()
 
     const deleteFolder = (name: string) => {
-        todosApi.delete(`${name}/`).then(response => updateFunc(!shouldUpdate))
+        todosApi.delete(`${name}/`, {headers: {"Authorization": `Basic ${token}`}}).then(response => updateFunc(!shouldUpdate))
     }
 
 
     useEffect(() => {
-        todosApi.get("").then(response => setFolders(response.data))
-    },[shouldUpdate])
+        todosApi.get("",{headers: {"Authorization": `Basic ${token}`}}).then(response => setFolders(response.data))
+    },[shouldUpdate, token])
 
     if(!folders){
         return <Typography>Loading...</Typography>

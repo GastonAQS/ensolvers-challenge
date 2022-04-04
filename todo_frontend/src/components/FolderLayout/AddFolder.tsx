@@ -6,13 +6,14 @@ import todosApi from "../../api/todosApi";
 
 interface Props {
   updateList: Function;
+  token: string;
 }
 
 interface RequestBody {
   Name: string;
 }
 
-const AddFolder = ({ updateList }: Props) => {
+const AddFolder = ({ updateList, token }: Props) => {
   const [nameError, setNameError] = useState(false);
   const [nameErrorMsg, setNameErrorMsg] = useState("");
   const [folderName, setFolderName] = useState("");
@@ -24,7 +25,7 @@ const AddFolder = ({ updateList }: Props) => {
     var body: RequestBody = { Name: folderName };
     
     todosApi
-      .post("", body, { headers: { "Content-Type": "application/json" } })
+      .post("", body, { headers: { "Content-Type": "application/json", "Authorization": `Basic ${token}` } })
       .then((response) => {
         setFolderName("")
         updateList();

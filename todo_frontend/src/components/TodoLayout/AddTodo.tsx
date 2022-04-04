@@ -7,7 +7,8 @@ import todosApi from "../../api/todosApi";
 
 interface Props {
   updateList: Function;
-  currentFolder: string
+  currentFolder: string;
+  token: string;
 }
 
 interface RequestBody {
@@ -15,7 +16,7 @@ interface RequestBody {
   Due_Date?: string | null;
 }
 
-const AddTodo = ({ updateList, currentFolder }: Props) => {
+const AddTodo = ({ updateList, currentFolder, token }: Props) => {
   const [todoDueDate, setTodoDueDate] = useState(null);
   const [dueDateError, setDueDateError] = useState(false);
   const [dueDateErrorMsg, setDueDateErrorMsg] = useState("");
@@ -37,7 +38,7 @@ const AddTodo = ({ updateList, currentFolder }: Props) => {
     }
     event.preventDefault();
     todosApi
-      .post(`${currentFolder}/`, body, { headers: { "Content-Type": "application/json" } })
+      .post(`${currentFolder}/`, body, { headers: { "Content-Type": "application/json","Authorization": `Basic ${token}` } })
       .then((response) => {
         setTodoDueDate(null);
         setTodoName("");

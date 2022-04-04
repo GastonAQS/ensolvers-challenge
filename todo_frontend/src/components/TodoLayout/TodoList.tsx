@@ -5,17 +5,19 @@ import List from "@mui/material/List";
 import TodoItem from "./TodoItem";
 import TodoType from "../../types/TodoType";
 
+
 interface Props {
   shouldUpdate: boolean;
   updateFunc: Function;
   folderName: string;
+  token: string;
 }
 
-const TodoList = ({ shouldUpdate, updateFunc, folderName }: Props) => {
+const TodoList = ({ shouldUpdate, updateFunc, folderName, token }: Props) => {
   const [todoState, setTodosState] = useState<Array<TodoType>>();
 
   const deleteItem = (id: number) => {
-    todos.delete(`${folderName}/${id}/`).then((response) => {
+    todos.delete(`${folderName}/${id}/`,{ headers: { "Authorization": `Basic ${token}` } }).then((response) => {
       updateFunc(!shouldUpdate);
     });
   };
@@ -24,15 +26,15 @@ const TodoList = ({ shouldUpdate, updateFunc, folderName }: Props) => {
     todos
       .put(`${folderName}/${id}/`, {
         Completed: val,
-      })
+      }, { headers: { "Authorization": `Basic ${token}` } })
       .then((response) => {
         updateFunc(!shouldUpdate);
       });
   };
 
   useEffect(() => {
-    todos.get(`${folderName}/`).then((response) => setTodosState(response.data.todo_set));
-  }, [shouldUpdate, folderName]);
+    todos.get(`${folderName}/`, { headers: { "Authorization": `Basic ${token}` } }).then((response) => setTodosState(response.data.todo_set));
+  }, [shouldUpdate, folderName, token]);
 
   if (!todoState) {
     return <Typography>Loading...</Typography>;

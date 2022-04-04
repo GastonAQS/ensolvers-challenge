@@ -59,6 +59,9 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
     "DATE_INPUT_FORMATS": ["%d/%m/%Y"],
+    'DEFAULT_PERMISSION_CLASSES': (
+    'rest_framework.permissions.IsAuthenticated',
+)
 }
 
 ROOT_URLCONF = 'rest_api.urls'

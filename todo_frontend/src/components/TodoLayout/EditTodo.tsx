@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -7,6 +7,7 @@ import DatePicker from "@mui/lab/DatePicker";
 import Button from "@mui/material/Button";
 import todosApi from "../../api/todosApi";
 import Checkbox from "@mui/material/Checkbox";
+import AppContext from '../../context/AppContext'
 
 interface RequestBody {
   Name: string;
@@ -15,6 +16,7 @@ interface RequestBody {
 }
 
 const EditTodo = () => {
+  const ctx = useContext(AppContext)
   const [todoDueDate, setTodoDueDate] = useState<string | null>("");
   const [todoCompleted, setTodoCompleted] = useState<boolean>();
   const [todoName, setTodoName] = useState("");
@@ -26,12 +28,12 @@ const EditTodo = () => {
   const { folder_name,id } = useParams();
 
   useEffect(() => {
-    todosApi.get(`/${folder_name}/${id}/`).then((response) => {
+    todosApi.get(`/${folder_name}/${id}/`, {headers:{"Authorization": `Basic ${ctx.user_auth_token}`}}).then((response) => {
       setTodoName(response.data.Name);
       setTodoDueDate(response.data.Due_Date);
       setTodoCompleted(response.data.Completed);
     });
-  }, [id, folder_name]);
+  }, [id, folder_name, ctx.user_auth_token]);
 
   function handleSubmit(event: any): any {
     setNameError(false);
@@ -51,7 +53,7 @@ const EditTodo = () => {
     }
     event.preventDefault();
     todosApi
-      .put(`/${folder_name}/${id}/`, body, { headers: { "Content-Type": "application/json" } })
+      .put(`/${folder_name}/${id}/`, body, { headers: { "Content-Type": "application/json", "Authorization": `Basic ${ctx.user_auth_token}`} })
       .then((response) => {
         navigate(`/${folder_name}`);
       })

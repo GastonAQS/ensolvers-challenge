@@ -1,5 +1,6 @@
 from django.urls import path
 from todo.views import *
+from todo.decorators import login_required
 
 urlpatterns = [
     path("folder/", TodosFolder.as_view()),
