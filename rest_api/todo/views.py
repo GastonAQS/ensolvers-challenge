@@ -4,7 +4,6 @@ from rest_framework import status
 from rest_framework.views import APIView
 from todo.todo_service import create_todo, get_todo, update_todo, delete_todo
 from todo.todo_folder_service import get_folders, new_folder, get_folder, remove_folder
-from todo.decorators import login_required
 from rest_framework.authentication import BasicAuthentication
 
 
