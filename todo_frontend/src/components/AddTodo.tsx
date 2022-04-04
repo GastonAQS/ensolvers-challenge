@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import DatePicker from "@mui/lab/DatePicker";
 import Button from "@mui/material/Button";
-import todosApi from "../api/todos";
+import todosApi from "../api/todosApi";
 
 interface Props {
   updateList: Function;
