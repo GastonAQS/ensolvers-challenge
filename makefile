@@ -7,6 +7,4 @@ react:
 	sh -c "npm --prefix ./todo_frontend start"
 
 run:
-	sh -c "kill -9 $(lsof -t -i:3000)"
-	sh -c "kill -9 $(lsof -t -i:8000)"
 	make django & make react

@@ -9,4 +9,4 @@ The backend runs on Django v4.0.3 using a SQLite 3 database to persist data.
 # Run the app
 In order to run this app clone the repository and execute <code>make run</code> in the root folder of the project.
 ## Important
-This script will kill all processes executing on port 3000 and 8000 because those ports will be used by React and Django
+This script will run React server on port 3000 and Django server on port 8000 so you must ensure this ports are not used by another dev server, you can kill processes running on those ports using <code>kill $(lsof -t -i:8000)</code> and <code>kill $(lsof -t -i:3000)</code>
