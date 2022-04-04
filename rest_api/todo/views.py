@@ -6,7 +6,12 @@ from todo.todo_service import create_todo, get_todo, update_todo, delete_todo
 from todo.todo_folder_service import get_folders, new_folder, get_folder, remove_folder
 from rest_framework.authentication import BasicAuthentication
 
-
+class Login(APIView):
+    authentication_classes = [
+        BasicAuthentication,
+    ]
+    def post(self, request, format=None):
+        return Response(data={"message": "logged in successfully"}, status=status.HTTP_200_OK)
 
 class TodoItem(APIView):
     authentication_classes = [

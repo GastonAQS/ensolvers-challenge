@@ -19,7 +19,7 @@ const Login = () => {
         setPasswordErr(false);
         const token = btoa(`${username}:${password}`)
         todosApi
-          .get("", { headers: { "Content-Type": "application/json", "Authorization": `Basic ${token}`} })
+          .post("http://localhost:8000/api/login/",{}, { headers: { "Content-Type": "application/json", "Authorization": `Basic ${token}`} })
           .then((response) => {
                 var d = new Date()
                 d.setTime(d.getTime() + 60*1000)
