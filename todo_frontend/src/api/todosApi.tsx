@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const todosApi = axios.create({
-  baseURL: process.env.BACKEND_URL,
+  baseURL: "https://todo-backend-ensolvers.herokuapp.com/api/todo/",
   headers: { Accept: "application/json" },
 });
 

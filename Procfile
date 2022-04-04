@@ -1,2 +1,1 @@
-release: make django
-web: cd rest_api; gunicorn rest_api.wsgi
+web: make django; cd rest_api; gunicorn rest_api.wsgi
