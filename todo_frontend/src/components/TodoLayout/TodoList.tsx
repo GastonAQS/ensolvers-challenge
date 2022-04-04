@@ -44,7 +44,7 @@ const TodoList = ({ shouldUpdate, updateFunc, folderName }: Props) => {
 
   return (
     <React.Fragment>
-      <List sx={{ maxWidth: "50%" }}>
+      <List sx={{ maxWidth: "30%" }}>
         {todoState.map((todoItem, idx) => (
           <TodoItem
             key={idx}

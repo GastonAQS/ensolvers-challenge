@@ -28,7 +28,7 @@ const FolderList = ({shouldUpdate, updateFunc}: Props) => {
     if(folders.length === 0){
         return <Typography>No folder created, create one below!</Typography>
     }
-    return <List sx={{ maxWidth: "50%" }}>
+    return <List sx={{ maxWidth: "30%" }}>
         {folders.map((folder, idx) => <FolderItem key={idx} id={folder.id} Name={folder.Name} todo_count={folder.todo_count} deleteItem={deleteFolder}/>)}
     </List>
 }
