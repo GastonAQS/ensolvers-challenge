@@ -20,7 +20,7 @@ class TodoSerializer(serializers.ModelSerializer):
     def validate_Due_Date(self, value):
         if value and value < date.today():
             raise serializers.ValidationError(
-                "Due date cannot be lesser than current date")
+                "Due date should be great or equal than current date")
         return value
 
     def get_Expires_Soon(self, instance):
@@ -33,7 +33,15 @@ class TodoSerializer(serializers.ModelSerializer):
         return instance.Due_Date and not instance.Completed and instance.Due_Date < today
 
 
-class FolderSerializer(serializers.ModelSerializer):
+class FolderSerializerOverview(serializers.ModelSerializer):
+    todo_count = serializers.IntegerField(required=False)
+    class Meta:
+        model = Folder
+        fields = "__all__"
+
+
+class FolderSerializerDetailed(serializers.ModelSerializer):
+    todo_set = TodoSerializer(many=True,read_only=True)
     todo_count = serializers.IntegerField(required=False)
 
     class Meta:

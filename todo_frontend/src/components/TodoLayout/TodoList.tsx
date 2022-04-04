@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from "react";
-import todos from "../api/todosApi";
+import todos from "../../api/todosApi";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import TodoItem from "./TodoItem";
-import TodoType from "../types/TodoType";
+import TodoType from "../../types/TodoType";
 
 interface Props {
   shouldUpdate: boolean;
   updateFunc: Function;
+  folderName: string;
 }
 
-const TodoList = ({ shouldUpdate, updateFunc }: Props) => {
+const TodoList = ({ shouldUpdate, updateFunc, folderName }: Props) => {
   const [todoState, setTodosState] = useState<Array<TodoType>>();
 
   const deleteItem = (id: number) => {
-    todos.delete(`/${id}/`).then((response) => {
+    todos.delete(`${folderName}/${id}/`).then((response) => {
       updateFunc(!shouldUpdate);
     });
   };
 
   const toggleCheckItem = (id: number, val: boolean) => {
     todos
-      .put(`/${id}/`, {
+      .put(`${folderName}/${id}/`, {
         Completed: val,
       })
       .then((response) => {
@@ -30,8 +31,8 @@ const TodoList = ({ shouldUpdate, updateFunc }: Props) => {
   };
 
   useEffect(() => {
-    todos.get("").then((response) => setTodosState(response.data));
-  }, [shouldUpdate]);
+    todos.get(`${folderName}/`).then((response) => setTodosState(response.data.todo_set));
+  }, [shouldUpdate, folderName]);
 
   if (!todoState) {
     return <Typography>Loading...</Typography>;
@@ -43,7 +44,7 @@ const TodoList = ({ shouldUpdate, updateFunc }: Props) => {
 
   return (
     <React.Fragment>
-      <List sx={{ maxWidth: "30%" }}>
+      <List sx={{ maxWidth: "50%" }}>
         {todoState.map((todoItem, idx) => (
           <TodoItem
             key={idx}
@@ -55,6 +56,7 @@ const TodoList = ({ shouldUpdate, updateFunc }: Props) => {
             toggleCheckItem={toggleCheckItem}
             Expires_Soon={todoItem.Expires_Soon}
             Expired={todoItem.Expired}
+            folderName={folderName}
           ></TodoItem>
         ))}
       </List>

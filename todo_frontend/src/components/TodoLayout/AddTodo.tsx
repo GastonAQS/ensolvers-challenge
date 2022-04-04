@@ -3,10 +3,11 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import DatePicker from "@mui/lab/DatePicker";
 import Button from "@mui/material/Button";
-import todosApi from "../api/todosApi";
+import todosApi from "../../api/todosApi";
 
 interface Props {
   updateList: Function;
+  currentFolder: string
 }
 
 interface RequestBody {
@@ -14,7 +15,7 @@ interface RequestBody {
   Due_Date?: string | null;
 }
 
-const AddTodo = ({ updateList }: Props) => {
+const AddTodo = ({ updateList, currentFolder }: Props) => {
   const [todoDueDate, setTodoDueDate] = useState(null);
   const [dueDateError, setDueDateError] = useState(false);
   const [dueDateErrorMsg, setDueDateErrorMsg] = useState("");
@@ -34,10 +35,9 @@ const AddTodo = ({ updateList }: Props) => {
         dueDate.getMonth() + 1
       }/${dueDate.getFullYear()}`;
     }
-    console.log(todoDueDate);
     event.preventDefault();
     todosApi
-      .post("", body, { headers: { "Content-Type": "application/json" } })
+      .post(`${currentFolder}/`, body, { headers: { "Content-Type": "application/json" } })
       .then((response) => {
         setTodoDueDate(null);
         setTodoName("");

@@ -14,11 +14,12 @@ import ListItemButton from "@mui/material/ListItemButton";
 import DialogTitle from "@mui/material/DialogTitle";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
-import TodoType from "../types/TodoType";
+import TodoType from "../../types/TodoType";
 
 interface Props extends TodoType {
   deleteItem: Function;
   toggleCheckItem: Function;
+  folderName: string
 }
 
 const TodoItem = ({
@@ -30,6 +31,7 @@ const TodoItem = ({
   toggleCheckItem,
   Expired,
   Expires_Soon,
+  folderName
 }: Props) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
@@ -65,7 +67,7 @@ const TodoItem = ({
         }}
         secondaryAction={
           <ListItemIcon>
-            <IconButton onClick={() => navigate(`/${id}`)}>
+            <IconButton onClick={() => navigate(`/${folderName}/${id}`)}>
               <EditIcon></EditIcon>
             </IconButton>
             <IconButton onClick={handleClickOpen}>

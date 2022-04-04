@@ -4,7 +4,8 @@ import DateAdapter from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import Header from "./components/Header";
 import Home from "./components/Home";
-import EditTodo from "./components/EditTodo";
+import BrowseTodos from "./components/TodoLayout/BrowseTodos";
+import EditTodo from "./components/TodoLayout/EditTodo";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <Header></Header>
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/:id" element={<EditTodo />}></Route>
+          <Route path="/:folder_name" element={<BrowseTodos />}></Route>
+          <Route path="/:folder_name/:id" element={<EditTodo />}></Route>
         </Routes>
       </Router>
     </LocalizationProvider>

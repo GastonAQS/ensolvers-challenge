@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import TodoList from "./TodoList";
-import AddTodo from "./AddTodo";
+import React, {useState} from 'react';
+import FolderList from './FolderLayout/FolderList';
+import AddFolder from './FolderLayout/AddFolder';
 
 const Home = () => {
-  const [update, setUpdate] = useState(false);
-  function updateList() {
-    setUpdate(!update);
-  }
-  return (
-    <div>
-      <TodoList shouldUpdate={update} updateFunc={updateList}></TodoList>
-      <AddTodo updateList={updateList}></AddTodo>
-    </div>
-  );
-};
+    const [update, setUpdate] = useState(false);
+    function updateList() {
+      setUpdate(!update);
+    }
+    return (
+      <div>
+        <FolderList shouldUpdate={update} updateFunc={updateList}></FolderList>
+        <AddFolder updateList={updateList}></AddFolder>
+      </div>
+    );
+}
 
 export default Home;

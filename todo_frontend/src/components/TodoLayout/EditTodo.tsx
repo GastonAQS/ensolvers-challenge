@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import DatePicker from "@mui/lab/DatePicker";
 import Button from "@mui/material/Button";
-import todosApi from "../api/todosApi";
+import todosApi from "../../api/todosApi";
 import Checkbox from "@mui/material/Checkbox";
 
 interface RequestBody {
@@ -23,16 +23,15 @@ const EditTodo = () => {
   const [nameError, setNameError] = useState(false);
   const [nameErrorMsg, setNameErrorMsg] = useState("");
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { folder_name,id } = useParams();
 
   useEffect(() => {
-    todosApi.get(`/${id}/`).then((response) => {
-      console.log(response.data);
+    todosApi.get(`/${folder_name}/${id}/`).then((response) => {
       setTodoName(response.data.Name);
       setTodoDueDate(response.data.Due_Date);
       setTodoCompleted(response.data.Completed);
     });
-  }, [id]);
+  }, [id, folder_name]);
 
   function handleSubmit(event: any): any {
     setNameError(false);
@@ -44,19 +43,17 @@ const EditTodo = () => {
       Due_Date: null,
       Completed: todoCompleted,
     };
-
     if (todoDueDate) {
       const dueDate = new Date(todoDueDate);
       body.Due_Date = `${dueDate.getDate()}/${
         dueDate.getMonth() + 1
       }/${dueDate.getFullYear()}`;
     }
-    console.log(todoDueDate);
     event.preventDefault();
     todosApi
-      .put(`/${id}/`, body, { headers: { "Content-Type": "application/json" } })
+      .put(`/${folder_name}/${id}/`, body, { headers: { "Content-Type": "application/json" } })
       .then((response) => {
-        navigate("/");
+        navigate(`/${folder_name}`);
       })
       .catch((err) => {
         if (err.response.status === 400) {
@@ -109,6 +106,7 @@ const EditTodo = () => {
               helperText={dueDateErrorMsg}
             />
           )}
+          inputFormat={"dd/MM/yyyy"}
         ></DatePicker>
       </div>
       <div>
@@ -119,7 +117,7 @@ const EditTodo = () => {
       </div>
       <div>
         <Button type="submit">Edit</Button>
-        <Button onClick={() => navigate("/")}>Cancel</Button>
+        <Button onClick={() => navigate(`/${folder_name}`)}>Cancel</Button>
       </div>
     </Box>
   );
