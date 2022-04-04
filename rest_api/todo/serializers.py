@@ -20,7 +20,7 @@ class TodoSerializer(serializers.ModelSerializer):
     def validate_Due_Date(self, value):
         if value and value < date.today():
             raise serializers.ValidationError(
-                "Due date cannot be lesser than current date")
+                "Due date should be great or equal than current date")
         return value
 
     def get_Expires_Soon(self, instance):
