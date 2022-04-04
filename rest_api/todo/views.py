@@ -2,7 +2,8 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from todo.service import get_all_todos, create_todo, get_todo, update_todo, delete_todo
+from todo.todo_service import get_all_todos, create_todo, get_todo, update_todo, delete_todo
+from todo.todo_folder_service import get_folders, new_folder
 
 
 class Todos(APIView):
@@ -27,3 +28,13 @@ class TodoItem(APIView):
     def delete(self, request, id, format=None):
         delete_todo(id)
         return Response({"message": "object deleted successfuly"})
+
+
+class TodosFolder(APIView):
+    def get(self, request, format=None):
+        folders = get_folders()
+        return Response(data=folders)
+
+    def post(self, request, format=None):
+        created_folder = new_folder(request.data)
+        return Response(data=created_folder, status=status.HTTP_201_CREATED)

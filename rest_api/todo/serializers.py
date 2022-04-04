@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from todo.models import Todo
+from todo.models import Todo, Folder
 
 from datetime import date
 from datetime import timedelta
@@ -31,3 +31,11 @@ class TodoSerializer(serializers.ModelSerializer):
     def get_Expired(self, instance):
         today = date.today()
         return instance.Due_Date and not instance.Completed and instance.Due_Date < today
+
+
+class FolderSerializer(serializers.ModelSerializer):
+    todo_count = serializers.IntegerField(required=False)
+
+    class Meta:
+        model = Folder
+        fields = "__all__"
