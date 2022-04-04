@@ -24,7 +24,8 @@ def get_todo(pk):
 
 def update_todo(pk, todo_data):
     todo_object = get_object_or_404(Todo, pk=pk)
-    serialized_todo = TodoSerializer(instance=todo_object, data=todo_data)
+    serialized_todo = TodoSerializer(
+        instance=todo_object, data=todo_data, partial=True)
     serialized_todo.is_valid(raise_exception=True)
     serialized_todo.save()
     return serialized_todo.data
