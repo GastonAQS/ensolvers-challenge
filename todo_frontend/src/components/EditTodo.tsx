@@ -72,7 +72,7 @@ const EditTodo = () => {
       });
   }
 
-  if (!(todoName && todoDueDate && todoCompleted)) {
+  if (!todoName) {
     return <Typography>Loading...</Typography>;
   }
   return (
