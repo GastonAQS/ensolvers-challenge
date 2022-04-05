@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/ensolvers-challenge/static/js/main.290a7a27.js",
+    "main.js": "/ensolvers-challenge/static/js/main.b6eccbb7.js",
     "index.html": "/ensolvers-challenge/index.html",
-    "main.290a7a27.js.map": "/ensolvers-challenge/static/js/main.290a7a27.js.map"
+    "main.b6eccbb7.js.map": "/ensolvers-challenge/static/js/main.b6eccbb7.js.map"
   },
   "entrypoints": [
-    "static/js/main.290a7a27.js"
+    "static/js/main.b6eccbb7.js"
   ]
 }
