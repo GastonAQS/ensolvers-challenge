@@ -37,7 +37,7 @@ const FolderItem = ({Name, id, todo_count, deleteItem}: Props) => {
       };
 
       const handleClick = () => {
-          navigate(`/${Name}`)
+          navigate(`/ensolvers-challenge/${Name}`)
       }
 
     return <React.Fragment>

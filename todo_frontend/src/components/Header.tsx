@@ -17,7 +17,7 @@ const Header = () => {
   <Container maxWidth="xl">
     <Toolbar disableGutters>
 
-      <IconButton onClick={() => navigate('/')}>
+      <IconButton onClick={() => navigate('/ensolvers-challenge/')}>
         <HomeIcon></HomeIcon>
       </IconButton>
       <Typography

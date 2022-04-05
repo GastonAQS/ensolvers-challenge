@@ -55,7 +55,7 @@ const EditTodo = () => {
     todosApi
       .put(`/${folder_name}/${id}/`, body, { headers: { "Content-Type": "application/json", "Authorization": `Basic ${ctx.user_auth_token}`} })
       .then((response) => {
-        navigate(`/${folder_name}`);
+        navigate(`/ensolvers-challenge/${folder_name}`);
       })
       .catch((err) => {
         if (err.response.status === 400) {
@@ -119,7 +119,7 @@ const EditTodo = () => {
       </div>
       <div>
         <Button type="submit">Edit</Button>
-        <Button onClick={() => navigate(`/${folder_name}`)}>Cancel</Button>
+        <Button onClick={() => navigate(`/ensolvers-challenge/${folder_name}`)}>Cancel</Button>
       </div>
     </Box>
   );

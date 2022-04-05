@@ -21,9 +21,9 @@ function App() {
       <Router>
         <Header></Header>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/:folder_name" element={<BrowseTodos />}></Route>
-          <Route path="/:folder_name/:id" element={<EditTodo />}></Route>
+          <Route path="/ensolvers-challenge/" element={<Home />}></Route>
+          <Route path="/ensolvers-challenge/:folder_name" element={<BrowseTodos />}></Route>
+          <Route path="/ensolvers-challenge/:folder_name/:id" element={<EditTodo />}></Route>
         </Routes>
       </Router>
     </LocalizationProvider>

@@ -67,7 +67,7 @@ const TodoItem = ({
         }}
         secondaryAction={
           <ListItemIcon>
-            <IconButton onClick={() => navigate(`/${folderName}/${id}`)}>
+            <IconButton onClick={() => navigate(`/ensolvers-challenge/${folderName}/${id}`)}>
               <EditIcon></EditIcon>
             </IconButton>
             <IconButton onClick={handleClickOpen}>
