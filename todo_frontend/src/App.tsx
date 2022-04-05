@@ -18,12 +18,12 @@ function App() {
   return (
     <ContextProvider value={{"user_auth_token": cookies.userToken}}>
     <LocalizationProvider dateAdapter={DateAdapter}>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Header></Header>
         <Routes>
-          <Route path="/ensolvers-challenge/" element={<Home />}></Route>
-          <Route path="/ensolvers-challenge/:folder_name" element={<BrowseTodos />}></Route>
-          <Route path="/ensolvers-challenge/:folder_name/:id" element={<EditTodo />}></Route>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/:folder_name" element={<BrowseTodos />}></Route>
+          <Route path="/:folder_name/:id" element={<EditTodo />}></Route>
         </Routes>
       </Router>
     </LocalizationProvider>
