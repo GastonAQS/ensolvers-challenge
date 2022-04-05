@@ -7,7 +7,6 @@ This app runs React v18, React Router DOM v6, uses Axios v0.26.1 to communicate 
 The backend runs on Django v4.0.3 using a SQLite 3 database to persist data and Django REST Framework 3.13.1 to simplify validation process and data presentation.
 
 # Run the app
-In order to run this app download the source code from Phase 1 release or clone the repository and execute <code>make run</code> in the root folder of the project.
+Go to https://gastonaqs.github.io/ensolvers-challenge/ to see the page, it will require login user: user password: pass, also you can run it locally if GitHub Pages has some problem from dev server. You don't need to run the backend because is running on heroku (url: https://todo-backend-ensolvers.herokuapp.com).
 
-## Important
-This script will run React server on port 3000 and Django server on port 8000 so you must ensure this ports are not used by another dev server, you can kill processes running on those ports using <code>kill $(lsof -t -i:8000)</code> and <code>kill $(lsof -t -i:3000)</code>
+
